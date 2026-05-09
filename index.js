@@ -4,7 +4,6 @@ const app = express();
 
 app.use(express.json());
 
-// 1. GET: Menampilkan semua movies
 app.get('/movies', (req, res) => {
     const sql = "SELECT * FROM movies";
     db.query(sql, (err, result) => {
@@ -13,7 +12,6 @@ app.get('/movies', (req, res) => {
     });
 });
 
-// 2. GET by ID: Menampilkan satu movie berdasarkan ID
 app.get('/movie/:id', (req, res) => {
     const { id } = req.params;
     const sql = "SELECT * FROM movies WHERE id = ?";
@@ -24,7 +22,6 @@ app.get('/movie/:id', (req, res) => {
     });
 });
 
-// 3. POST: Menambahkan movie baru
 app.post('/movie', (req, res) => {
     const { title, genre, year } = req.body;
     const sql = "INSERT INTO movies (title, genre, year) VALUES (?, ?, ?)";
@@ -34,7 +31,6 @@ app.post('/movie', (req, res) => {
     });
 });
 
-// 4. PATCH: Mengubah data movie berdasarkan ID
 app.patch('/movie/:id', (req, res) => {
     const { id } = req.params;
     const { title, genre, year } = req.body;
@@ -45,7 +41,6 @@ app.patch('/movie/:id', (req, res) => {
     });
 });
 
-// 5. DELETE: Menghapus movie berdasarkan ID
 app.delete('/movie/:id', (req, res) => {
     const { id } = req.params;
     const sql = "DELETE FROM movies WHERE id = ?";
@@ -55,7 +50,6 @@ app.delete('/movie/:id', (req, res) => {
     });
 });
 
-// Jalankan Server
 app.listen(3000, () => {
     console.log('Server running on http://localhost:3000');
 });
